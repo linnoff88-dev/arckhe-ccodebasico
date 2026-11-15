@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Track 4 — Skills, Plugins &amp; Memory | Claude Code Basics | INEMA.CLUB</title>
+<meta content="ccodebasico" name="inema-course"/>
+<script>
+    try {
+      var p = JSON.parse(localStorage.getItem('inema.prefs') || '{}');
+      if (p.dark === false) document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+    } catch(e) { document.documentElement.classList.add('dark'); }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'dark-900': '#0f172a', 'dark-800': '#1e293b', 'dark-700': '#334155', 'dark-600': '#475569', primary: '#FACC15' } } } }
+  </script>
+<style>
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) nav { background-color: rgba(255,255,255,0.95) !important; border-bottom-color: #e5e7eb !important; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217,119,6,0.12); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217,119,6,0.25); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .text-rose-400 { color: #9f1239; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    .topic-explanation { display: none; }
+    .topic-explanation.open { display: block; }
+    [id] { scroll-margin-top: 72px; }
+    @keyframes wf-pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.4s} .wf-a:nth-child(3){animation-delay:.8s} .wf-a:nth-child(4){animation-delay:1.2s}
+    }
+  </style>
+<link href="https://inematds.github.io/ccodebasico/curso/trilha4/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/ccodebasico/en/curso/trilha4/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/ccodebasico/es/curso/trilha4/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha4/" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha4/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<a class="text-primary font-black text-xl tracking-tight" href="../../">Claude Code Basics</a>
+<span class="text-dark-600 hidden sm:inline">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium hidden sm:inline" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center gap-1.5 flex-wrap">
+<a class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-emerald-400 transition" href="../trilha1/">T1 Basics</a>
+<a class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-blue-400 transition" href="../trilha2/">T2 From Scratch</a>
+<a class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-purple-400 transition hidden sm:inline" href="../trilha3/">T3 Context</a>
+<a class="text-xs px-2.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30 font-medium" href="../trilha4/">T4 Skills</a>
+<a class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-teal-400 transition hidden md:inline" href="../trilha5/">T5 MCP</a>
+<a class="text-xs px-2.5 py-1.5 rounded-lg bg-dark-700 text-neutral-300 hover:text-rose-400 transition hidden lg:inline" href="../trilha6/">T6 Agents</a>
+<button aria-label="Toggle theme" class="w-8 h-8 rounded-lg bg-dark-700 hover:bg-dark-600 flex items-center justify-center transition text-neutral-400" onclick="toggleTheme()">
+<svg class="w-4 h-4 hidden" fill="currentColor" id="icon-sun" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+<svg class="w-4 h-4" fill="currentColor" id="icon-moon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+</button>
+</div>
+</div>
+</nav>
+<!-- TRAIL HEADER -->
+<header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4 border border-amber-500/30">TRACK 4</span>
+<h1 class="text-3xl sm:text-4xl font-black mb-3">🟡 Skills, Plugins &amp; Memory</h1>
+<p class="text-neutral-300 text-lg mb-6 max-w-2xl">Extend Claude Code: create and use Skills, install plugins from marketplaces, give the agent permanent memory, and truly master CLAUDE.md.</p>
+<div class="flex flex-wrap gap-4 text-sm">
+<span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-amber-400"></span>6 modules</span>
+<span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-amber-400"></span>~45 minutes</span>
+<span class="flex items-center gap-1.5 text-neutral-400"><span class="w-2 h-2 rounded-full bg-amber-400"></span>Customize your Claude</span>
+</div>
+</div>
+<!-- HERO SVG: skills/plugins encaixando no Claude Code + memória -->
+<div class="rounded-2xl border border-amber-500/30 bg-dark-900/40 p-4 overflow-hidden">
+<svg aria-label="Skills and plugins fit into the core Claude Code system, adding persistent memory" class="w-full h-auto" font-family="Inter,sans-serif" role="img" viewbox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="t4-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fbbf24"></stop><stop offset="1" stop-color="#f59e0b"></stop></lineargradient>
+<filter height="180%" id="t4-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.6"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="26" id="t4-grid" patternunits="userSpaceOnUse" width="26"><circle cx="1.2" cy="1.2" fill="#38bdf8" opacity="0.08" r="1.2"></circle></pattern>
+</defs>
+<rect fill="url(#t4-grid)" height="220" width="640"></rect>
+<!-- núcleo Claude Code -->
+<rect fill="url(#t4-grad)" filter="url(#t4-glow)" height="48" rx="12" width="150" x="250" y="86"></rect>
+<text fill="#451a03" font-size="12" font-weight="700" text-anchor="middle" x="325" y="106">✳ CLAUDE CODE</text>
+<text fill="#78350f" font-size="8" text-anchor="middle" x="325" y="122">+ skills · plugins · memory</text>
+<!-- skills entrando pela esquerda -->
+<rect fill="#1e293b" height="30" rx="7" stroke="#fbbf24" stroke-width="1.6" width="116" x="28" y="34"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="86" y="53">📦 SKILL.md</text>
+<rect fill="#1e293b" height="30" rx="7" stroke="#fbbf24" stroke-width="1.6" width="116" x="28" y="96"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="86" y="115">🧩 /plugin</text>
+<rect fill="#1e293b" height="30" rx="7" stroke="#fbbf24" stroke-width="1.6" width="116" x="28" y="158"></rect>
+<text fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" x="86" y="177">🧠 /memory</text>
+<path class="wf-a" d="M144,49 C200,49 210,105 250,105" fill="none" opacity="0.7" stroke="#f59e0b" stroke-width="1.8"></path>
+<path class="wf-a" d="M144,111 L250,110" fill="none" opacity="0.7" stroke="#f59e0b" stroke-width="1.8"></path>
+<path class="wf-a" d="M144,173 C200,173 210,116 250,115" fill="none" opacity="0.7" stroke="#f59e0b" stroke-width="1.8"></path>
+<!-- memória persistente à direita (cilindro) -->
+<path class="wf-a" d="M400,110 L452,110" fill="none" opacity="0.7" stroke="#38bdf8" stroke-width="1.8"></path>
+<ellipse cx="540" cy="74" fill="#0b1220" rx="60" ry="12" stroke="#38bdf8" stroke-width="1.4"></ellipse>
+<path d="M480,74 L480,146 A60,12 0 0 0 600,146 L600,74" fill="#0b1220" stroke="#38bdf8" stroke-width="1.4"></path>
+<ellipse cx="540" cy="74" fill="none" rx="60" ry="12" stroke="#38bdf8" stroke-width="1.4"></ellipse>
+<text fill="#38bdf8" font-size="9" font-weight="600" text-anchor="middle" x="540" y="112">memory</text>
+<text fill="#64748b" font-size="7.5" text-anchor="middle" x="540" y="126">.claude/ · cross-session</text>
+</svg>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<!-- MAPA DA TRILHA (OBRIGATÓRIO) -->
+<section class="mb-12" id="mapa-da-trilha">
+<h2 class="text-2xl font-bold mb-6">Learning path map</h2>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3">
+<a class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/40 p-4 transition block" href="#modulo-4-1">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 text-sm font-bold">4.1</span><span class="text-xs text-neutral-500">~7 min</span></div>
+<div class="font-semibold text-sm mb-1">📦 What Skills Are</div>
+<p class="text-xs text-neutral-400">Invokes when needed</p>
+</a>
+<a class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/40 p-4 transition block" href="#modulo-4-2">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 text-sm font-bold">4.2</span><span class="text-xs text-neutral-500">~8 min</span></div>
+<div class="font-semibold text-sm mb-1">🛠️ Creating Your Skills</div>
+<p class="text-xs text-neutral-400">skill-creator · minimum structure</p>
+</a>
+<a class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/40 p-4 transition block" href="#modulo-4-3">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 text-sm font-bold">4.3</span><span class="text-xs text-neutral-500">~7 min</span></div>
+<div class="font-semibold text-sm mb-1">🧩 Plugins &amp; Marketplaces</div>
+<p class="text-xs text-neutral-400">/plugin · Claude Mem · Vision</p>
+</a>
+<a class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/40 p-4 transition block" href="#modulo-4-4">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 text-sm font-bold">4.4</span><span class="text-xs text-neutral-500">~7 min</span></div>
+<div class="font-semibold text-sm mb-1">🧠 Permanent Memory</div>
+<p class="text-xs text-neutral-400">/memory · Memory 2.0 · cross-session</p>
+</a>
+<a class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/40 p-4 transition block" href="#modulo-4-5">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 text-sm font-bold">4.5</span><span class="text-xs text-neutral-500">~7 min</span></div>
+<div class="font-semibold text-sm mb-1">📋 Advanced CLAUDE.md</div>
+<p class="text-xs text-neutral-400">hierarchy · universal prompt</p>
+</a>
+<a class="bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/40 p-4 transition block" href="#modulo-4-6">
+<div class="flex items-center justify-between mb-2"><span class="text-amber-400 text-sm font-bold">4.6</span><span class="text-xs text-neutral-500">~6 min</span></div>
+<div class="font-semibold text-sm mb-1">🎨 Design Skills</div>
+<p class="text-xs text-neutral-400">Impeccable · frontend-design</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Detailed content</h2>
+<!-- Módulo 4.1 -->
+<div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-4-1">
+<button aria-controls="exp-4-1" aria-expanded="false" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left" onclick="toggleTopic(this)">
+<span class="text-amber-400 text-xs font-bold w-6 flex-shrink-0">4.1</span>
+<span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+<div class="flex-1 min-w-0">
+<h2 class="text-xl font-bold">What Skills are</h2>
+<p class="text-sm text-neutral-400 mt-0.5">SKILL.md · frontmatter · automatic vs. manual invocation · .claude/skills/</p>
+</div>
+<span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+<svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="topic-explanation px-5 pb-6" id="exp-4-1">
+<div class="border-t border-dark-600 pt-5 space-y-5">
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">🟡 What It Is</h3><p class="text-neutral-300 text-sm leading-relaxed">One <strong>Skill</strong> is a reusable set of instructions that teaches Claude to perform a specific workflow predictably. It’s a <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">SKILL.md</code> with a <em>frontmatter</em> (<code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">name</code> + <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">description</code>) that lives in <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">.claude/skills/</code>.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">💡 Why learn</h3><p class="text-neutral-300 text-sm leading-relaxed">The secret to Skills: they <strong>only load when needed</strong>. Unlike CLAUDE.md (always in memory), a Skill saves context and appears only at the right time — Claude reads the <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">description</code> and decides to invoke.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-3">🔑 CLAUDE.md vs. Skill</h3>
+<div class="overflow-x-auto rounded-xl border border-dark-600"><table class="w-full text-sm"><thead class="bg-dark-700"><tr><th class="text-left px-4 py-3 text-neutral-300 font-semibold">CLAUDE.md</th><th class="text-left px-4 py-3 text-neutral-300 font-semibold">Skill</th></tr></thead><tbody class="divide-y divide-dark-600"><tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-neutral-300 text-xs">Always loaded</td><td class="px-4 py-3 text-neutral-300 text-xs">Only loads when invoked</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-neutral-300 text-xs">Project-wide rules</td><td class="px-4 py-3 text-neutral-300 text-xs">Specific task workflows</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-neutral-400 text-xs">Ex: "Use TypeScript"</td><td class="px-4 py-3 text-neutral-400 text-xs">Ex: "Generate PR summary"</td></tr></tbody></table></div>
+<p class="text-xs text-neutral-400 mt-2">Rule of thumb: if Claude should <strong>always know</strong> → CLAUDE.md. If it’s for a <strong>specific task</strong> → Skill.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Módulo 4.2 -->
+<div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-4-2">
+<button aria-controls="exp-4-2" aria-expanded="false" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left" onclick="toggleTopic(this)">
+<span class="text-amber-400 text-xs font-bold w-6 flex-shrink-0">4.2</span>
+<span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+<div class="flex-1 min-w-0">
+<h2 class="text-xl font-bold">Creating Your Skills</h2>
+<p class="text-sm text-neutral-400 mt-0.5">skill-creator · minimum structure · the 6 chapters of the official guide</p>
+</div>
+<span class="text-xs text-neutral-500 hidden sm:block">~8 min</span>
+<svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="topic-explanation px-5 pb-6" id="exp-4-2">
+<div class="border-t border-dark-600 pt-5 space-y-5">
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">🟡 What It Is</h3><p class="text-neutral-300 text-sm leading-relaxed">You don’t need to write the Skill from scratch: the skill <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">skill-creator</code> interviews you and generates the <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">SKILL.md</code>. The key is <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">description</code> well-written — that’s what lets Claude know <em>when</em> use.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">💡 Why learn</h3><p class="text-neutral-300 text-sm leading-relaxed">A well-crafted Skill eliminates repetition: you write the “how to” once, and it reuses it forever. Anthropic’s official guide organizes this into <strong>6 chapters</strong>, from the fundamentals to distribution.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-3">🔑 Minimum Skill Structure</h3>
+<pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono mb-3">---
+name: pr-review
+description: Use quando pedir revisão de PR, diff ou código alterado.
+---
+Ao revisar um PR:
+1. Leia o diff completo
+2. Aponte riscos de segurança
+3. Verifique cobertura de testes
+4. Classifique os achados por severidade</pre>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
+<div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-amber-400 font-semibold">1.</span> Fundamentals</div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-amber-400 font-semibold">2.</span> Planning and Design</div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-amber-400 font-semibold">3.</span> Testing and Iteration</div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-amber-400 font-semibold">4.</span> Distribution</div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-amber-400 font-semibold">5.</span> Patterns and Problems</div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-lg p-3"><span class="text-amber-400 font-semibold">6.</span> Resources and References</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Módulo 4.3 -->
+<div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-4-3">
+<button aria-controls="exp-4-3" aria-expanded="false" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left" onclick="toggleTopic(this)">
+<span class="text-amber-400 text-xs font-bold w-6 flex-shrink-0">4.3</span>
+<span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+<div class="flex-1 min-w-0">
+<h2 class="text-xl font-bold">Plugins &amp; Marketplaces</h2>
+<p class="text-sm text-neutral-400 mt-0.5">/plugin marketplace add · install · Claude Mem · Vision plugin</p>
+</div>
+<span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+<svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="topic-explanation px-5 pb-6" id="exp-4-3">
+<div class="border-t border-dark-600 pt-5 space-y-5">
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">🟡 What It Is</h3><p class="text-neutral-300 text-sm leading-relaxed">Plugins bundle skills, commands, agents, and hooks into an installable package. You add a <em>marketplace</em> (a GitHub repository) and install plugins from there with <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">/plugin</code>.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">💡 Why learn</h3><p class="text-neutral-300 text-sm leading-relaxed">Plugins are the fastest way to supercharge Claude Code with community work. E.g., <strong>Claude Mem</strong> provides memory across sessions; the <strong>Vision plugin</strong> gives it eyes to read images/screens.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-3">🔑 Installing a Plugin</h3>
+<pre class="bg-dark-900 rounded-lg p-3 text-xs text-amber-300 overflow-x-auto font-mono mb-3"># 1. adicione o marketplace (repo)
+/plugin marketplace add thedotmack/claude-mem
+# 2. instale o plugin
+/plugin install claude-mem</pre>
+<div class="rounded-xl bg-red-500/5 border border-red-500/30 p-4"><p class="text-sm text-neutral-300"><span class="text-red-400 font-semibold">⚠️ Attention:</span> for Claude Mem, <strong>don't use <code class="bg-dark-900 px-1.5 py-0.5 rounded text-red-400 text-xs font-mono">npm install</code></strong> — this installs only the library and the <em>hooks are not registered</em>. Use exactly the two commands <code class="bg-dark-900 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">/plugin</code> above.</p></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Módulo 4.4 -->
+<div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-4-4">
+<button aria-controls="exp-4-4" aria-expanded="false" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left" onclick="toggleTopic(this)">
+<span class="text-amber-400 text-xs font-bold w-6 flex-shrink-0">4.4</span>
+<span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+<div class="flex-1 min-w-0">
+<h2 class="text-xl font-bold">Permanent Memory</h2>
+<p class="text-sm text-neutral-400 mt-0.5">/memory · Memory 2.0 (Auto Dream) · cross-session memory</p>
+</div>
+<span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+<svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="topic-explanation px-5 pb-6" id="exp-4-4">
+<div class="border-t border-dark-600 pt-5 space-y-5">
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">🟡 What It Is</h3><p class="text-neutral-300 text-sm leading-relaxed">Besides CLAUDE.md, Claude Code has persistent memory in <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">.claude/projects/&lt;projeto&gt;/memory/</code>, managed by the <code class="bg-dark-700 px-1.5 py-0.5 rounded text-amber-400 text-xs font-mono">/memory</code>. O <strong>Memory 2.0 / Auto Dream</strong> consolidates these memories automatically.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">💡 Why learn</h3><p class="text-neutral-300 text-sm leading-relaxed">Memory across sessions = you stop re-explaining the project every time. The agent remembers yesterday's decisions, corrections, and conventions. That's what turns Claude into a colleague who knows your code.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-3">🔑 How "dream" Works</h3>
+<div class="space-y-2 mb-3">
+<div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-xs text-amber-400 font-bold flex-shrink-0">1</span><p class="text-sm text-neutral-300">Run <strong>in the background</strong>, on its own — it’s not a command you run</p></div>
+<div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-xs text-amber-400 font-bold flex-shrink-0">2</span><p class="text-sm text-neutral-300">Triggers when: <strong>24h+</strong> since the last dream <strong>and 5+ sessions</strong> accumulated</p></div>
+<div class="flex gap-3"><span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-xs text-amber-400 font-bold flex-shrink-0">3</span><p class="text-sm text-neutral-300">Consolidate <strong>by project</strong> — the ones you use most are consolidated first</p></div>
+</div>
+<div class="grid sm:grid-cols-2 gap-3">
+<div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-amber-400 mb-1">/native memory</div><p class="text-xs text-neutral-400">Project memory, controlled by Anthropic (gradual rollout)</p></div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-amber-400 mb-1">Claude Mem (plugin)</div><p class="text-xs text-neutral-400">Captures edits/decisions → SQLite with vector search, injects them at the start</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Módulo 4.5 -->
+<div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-4-5">
+<button aria-controls="exp-4-5" aria-expanded="false" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left" onclick="toggleTopic(this)">
+<span class="text-amber-400 text-xs font-bold w-6 flex-shrink-0">4.5</span>
+<span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+<div class="flex-1 min-w-0">
+<h2 class="text-xl font-bold">Advanced CLAUDE.md</h2>
+<p class="text-sm text-neutral-400 mt-0.5">hierarchy · universal prompt · best practices that save context</p>
+</div>
+<span class="text-xs text-neutral-500 hidden sm:block">~7 min</span>
+<svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="topic-explanation px-5 pb-6" id="exp-4-5">
+<div class="border-t border-dark-600 pt-5 space-y-5">
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">🟡 What It Is</h3><p class="text-neutral-300 text-sm leading-relaxed">The CLAUDE.md contains <strong>hierarchy</strong>: your rules (global), project rules, and local rules work together. A good CLAUDE.md is short, specific, and in bullet points—not a novel. The idea behind a “universal prompt” is to have a reusable skeleton across projects.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">💡 Why learn</h3><p class="text-neutral-300 text-sm leading-relaxed">Bloated CLAUDE.md <em>uses up context in every session</em>. The advanced part is knowing what <strong>no</strong> put in (what's in the code), and what’s worth gold (commands, conventions, “never do X”).</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-3">🔑 Hierarchy + Skeleton</h3>
+<div class="overflow-x-auto rounded-xl border border-dark-600 mb-3"><table class="w-full text-sm"><thead class="bg-dark-700"><tr><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">File</th><th class="text-left px-4 py-2 text-neutral-300 font-semibold text-xs">Scope</th></tr></thead><tbody class="divide-y divide-dark-600 text-xs"><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 font-mono text-amber-400">~/.claude/CLAUDE.md</td><td class="px-4 py-2 text-neutral-300">Your rules — all projects</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 font-mono text-amber-400">./CLAUDE.md</td><td class="px-4 py-2 text-neutral-300">Project (goes into git, the whole team)</td></tr><tr class="hover:bg-dark-700/50"><td class="px-4 py-2 font-mono text-amber-400">./CLAUDE.local.md</td><td class="px-4 py-2 text-neutral-300">Just you, outside Git</td></tr></tbody></table></div>
+<pre class="bg-dark-900 rounded-lg p-3 text-xs text-neutral-300 overflow-x-auto font-mono"># Comandos
+- Dev: `pnpm dev` · Test: `pnpm test` · Build: `pnpm build`
+# Convenções
+- TypeScript estrito, sem `any`
+- Componentes em PascalCase
+# Regras
+- NUNCA commitar na main; sempre branch + PR</pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Módulo 4.6 -->
+<div class="mb-6 rounded-2xl border border-dark-600 bg-dark-800 overflow-hidden" id="modulo-4-6">
+<button aria-controls="exp-4-6" aria-expanded="false" class="w-full flex justify-start items-center gap-4 p-5 hover:bg-dark-700 transition text-left" onclick="toggleTopic(this)">
+<span class="text-amber-400 text-xs font-bold w-6 flex-shrink-0">4.6</span>
+<span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+<div class="flex-1 min-w-0">
+<h2 class="text-xl font-bold">Design Skills</h2>
+<p class="text-sm text-neutral-400 mt-0.5">Impeccable vs frontend-design · Claude Design · iteration vocabulary</p>
+</div>
+<span class="text-xs text-neutral-500 hidden sm:block">~6 min</span>
+<svg class="w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="topic-explanation px-5 pb-6" id="exp-4-6">
+<div class="border-t border-dark-600 pt-5 space-y-5">
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">🟡 What It Is</h3><p class="text-neutral-300 text-sm leading-relaxed">Design skills teach Claude to create truly beautiful UI. The <strong>frontend-design</strong> (Anthropic) is already included in the kit; the <strong>Impeccable</strong> is an enriched fork—with 7 domain references always loaded and an “AI slop” detector.</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-2">💡 Why learn</h3><p class="text-neutral-300 text-sm leading-relaxed">The difference between a “generic AI” page and a premium page lies in these skills. Impeccable brings a <strong>iteration vocabulary</strong> (23 verbal commands) to refine, not just "build a page."</p></div>
+<div><h3 class="text-base font-semibold text-amber-400 mb-3">🔑 Impeccable in Brief</h3>
+<div class="grid sm:grid-cols-2 gap-3 mb-3">
+<div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-amber-400 mb-1">7 domain refs</div><p class="text-xs text-neutral-400">typography, color (OKLCH), spacing, motion, interaction, responsive design, UX writing</p></div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-amber-400 mb-1">23 verbal commands</div><p class="text-xs text-neutral-400">/polish /audit /critique /harden /animate /layout /distill…</p></div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-amber-400 mb-1">Anti-pattern detector</div><p class="text-xs text-neutral-400"><code class="text-amber-400 font-mono">npx impeccable detect src/</code> — catches “AI slop” without an API key</p></div>
+<div class="bg-dark-700/40 border border-dark-600 rounded-xl p-3"><div class="text-xs font-bold text-amber-400 mb-1">/teach + /extract</div><p class="text-xs text-neutral-400">Generates PRODUCT.md + DESIGN.md as a living design system</p></div>
+</div>
+<p class="text-xs text-neutral-400">When to use Anthropic’s frontend-design: quick “one-shot” UI, without installing anything extra. Impeccable: when you’re going to iterate and want a real design system.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation -->
+<div class="flex items-center justify-between mt-10 pt-8 border-t border-dark-700">
+<a class="text-sm text-neutral-400 hover:text-neutral-200 transition flex items-center gap-2" href="../trilha3/">← T3 Context</a>
+<a class="text-sm text-teal-400 hover:text-teal-300 transition flex items-center gap-2" href="../trilha5/">Next: T5 MCP &amp; Integrations →</a>
+</div>
+</div>
+<footer class="border-t border-dark-700 py-10 px-4 mt-8">
+<div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="text-primary font-black text-lg">Claude Code Basics</span>
+<span class="text-dark-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<p class="text-sm text-neutral-500">Channel <a class="text-amber-400 hover:text-amber-300" href="https://t.me/c/3012468959" target="_blank">Claude Code (INEMA)</a> · 2026</p>
+<p class="text-xs text-neutral-600">Community-curated · INEMA.CLUB</p>
+</div>
+</footer>
+<script>
+  function toggleTopic(btn) {
+    const id = btn.getAttribute('aria-controls');
+    const panel = document.getElementById(id);
+    const svg = btn.querySelector('svg:last-child');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    if (svg) svg.style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.classList.toggle('dark');
+    document.getElementById('icon-sun').classList.toggle('hidden', isDark);
+    document.getElementById('icon-moon').classList.toggle('hidden', !isDark);
+    try { localStorage.setItem('inema.prefs', JSON.stringify({dark: isDark})); } catch(e){}
+  }
+  (function() {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.getElementById('icon-sun').classList.toggle('hidden', isDark);
+    document.getElementById('icon-moon').classList.toggle('hidden', !isDark);
+  })();
+</script>
+</body>
+</html>
